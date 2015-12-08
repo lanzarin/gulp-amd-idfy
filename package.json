@@ -1,6 +1,6 @@
 {
   "name": "gulp-amd-idfy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "gulp plugin to add identifier to AMD modules",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,10 @@
     "id",
     "identifier",
     "name",
+    "module",
     "gulpplugin",
+    "optimizer",
+    "requirejs",
     "gulpfriendly"
   ],
   "author": "Philippe FERDINAND",

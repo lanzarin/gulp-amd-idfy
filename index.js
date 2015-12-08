@@ -1,3 +1,4 @@
+var path = require('path');
 var babel = require('babel-core');
 var through = require('through2');
 var PluginError = require('gulp-util').PluginError;
@@ -31,8 +32,6 @@ module.exports = function() {
         this.emit('error', new PluginError(PLUGIN_NAME, 'Streams not supported!'));
       } else if (file.isBuffer()) {
         // file.contents is a Buffer - https://nodejs.org/api/buffer.html
-        
-        debugger;
         var result = babel.transform(file.contents.toString());
         
         // Search for the define() call at the root of the AST.
@@ -43,7 +42,7 @@ module.exports = function() {
           if (defineNode.expression.arguments[0].type !== 'StringLiteral') {
             defineNode.expression.arguments.splice(0, 0, {
               "type": "StringLiteral",
-              "value": file.basename.substring(0, file.basename.length - file.extname.length)
+              "value": path.relative(file.base, file.path).match(/(.*)\.[^.]+$/, '')[1]
             });
             file.contents = new Buffer(babel.transformFromAst(result.ast).code);
           }
