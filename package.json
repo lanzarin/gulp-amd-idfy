@@ -14,9 +14,10 @@
     "gulp",
     "amd",
     "id",
-    "identier",
+    "identifier",
     "name",
-    "gulpplugin"
+    "gulpplugin",
+    "gulpfriendly"
   ],
   "author": "Philippe FERDINAND",
   "license": "MIT",
