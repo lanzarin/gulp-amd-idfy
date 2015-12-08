@@ -1,6 +1,6 @@
 {
   "name": "gulp-amd-idfy",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "gulp plugin to add identifier to AMD modules",
   "main": "index.js",
   "scripts": {
