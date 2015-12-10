@@ -1,5 +1,7 @@
 # gulp-amd-idfy
-[![Build Status](https://travis-ci.org/pferdinand/gulp-amd-idfy.svg?branch=master)](https://travis-ci.org/pferdinand/gulp-amd-idfy) [![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/gulp-amd-idfy)
+[![Build Status](https://travis-ci.org/pferdinand/gulp-amd-idfy.svg?branch=master)](https://travis-ci.org/pferdinand/gulp-amd-idfy)
+[![npm](https://img.shields.io/npm/v/gulp-amd-idfy.svg)](https://www.npmjs.com/package/gulp-amd-idfy)
+[![npm](https://img.shields.io/npm/l/gulp-amd-idfy.svg)](https://raw.githubusercontent.com/pferdinand/gulp-amd-idfy/master/LICENSE)
 > A gulp plugin to add identifier to AMD modules.
 
 Use this plugin to give an identifier to your AMD modules when writing your own optimizer.
