@@ -6,8 +6,6 @@ var PluginError = require('gulp-util').PluginError;
 // consts
 var PLUGIN_NAME = 'gulp-amd-idfy';
 
-console.log(PLUGIN_NAME + ' started');
-
 module.exports = function(basePath) {
     
   function findDefine(body) {
@@ -21,8 +19,15 @@ module.exports = function(basePath) {
     return null;
   }
   
-  function getModuleName(base, path) {
-      return path.relative(base, path).replace(/^\/|(\.\.?\/)+/, '');
+  function getModuleName(filebase, filepath) {
+      var rel;
+
+      if(basePath) {
+          rel = path.relative(basePath, path.relative(filebase, filepath));
+      } else {
+          rel = path.relative(base, filepath);
+      }
+      return rel.replace(new RegExp('\\\\', 'g'), '/').replace(/^\/|(\.\.?\/)+/, '');
   }
   
   return through.obj(function(file, encoding, callback) {
@@ -46,7 +51,7 @@ module.exports = function(basePath) {
           if (defineNode.expression.arguments[0].type !== 'StringLiteral') {
             defineNode.expression.arguments.splice(0, 0, {
               "type": "StringLiteral",
-              "value": getModuleName(basePath || file.base, file.path)
+              "value": getModuleName(file.base, file.path)
             });
             file.contents = new Buffer(babel.transformFromAst(result.ast).code);
           }
