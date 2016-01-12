@@ -8,7 +8,7 @@ var PLUGIN_NAME = 'gulp-amd-idfy';
 
 console.log(PLUGIN_NAME + ' started');
 
-module.exports = function() {
+module.exports = function(basePath) {
     
   function findDefine(body) {
     for (var i = 0; i < body.length; i++) {
@@ -19,6 +19,10 @@ module.exports = function() {
       }      
     }
     return null;
+  }
+  
+  function getModuleName(base, path) {
+      return path.relative(base, path).replace(/^\/|(\.\.?\/)+/, '');
   }
   
   return through.obj(function(file, encoding, callback) {
@@ -42,7 +46,7 @@ module.exports = function() {
           if (defineNode.expression.arguments[0].type !== 'StringLiteral') {
             defineNode.expression.arguments.splice(0, 0, {
               "type": "StringLiteral",
-              "value": path.relative(file.base, file.path).match(/(.*)\.[^.]+$/, '')[1]
+              "value": getModuleName(basePath || file.base, file.path)
             });
             file.contents = new Buffer(babel.transformFromAst(result.ast).code);
           }
